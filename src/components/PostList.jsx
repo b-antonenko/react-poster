@@ -4,17 +4,12 @@ import NewPost from './NewPost';
 import Modal from './Modal';
 import classes from './PostList.module.css';
 
-const PostList = () => {
+const PostList = ({ showModal, hideModalHandler }) => {
 
-    const [enteredBody, setEnteredBody] = useState('');
-    const [enteredAuthor, setEnteredAuthor] = useState('');
-    const [showModal, setShowModal] = useState(true); 
+    const [posts, setPosts] = useState([]);
 
-    const onBodyChangeHandler = (e) => setEnteredBody(e.target.value);
-    const onAuthorChangeHandler = (e) => setEnteredAuthor(e.target.value);
-
-    const hideModalHandler = () => {
-        setShowModal(false);
+    const addPost = (data) => {
+        setPosts((currentState) => [data, ...currentState]);
     };
 
     return (
@@ -22,15 +17,20 @@ const PostList = () => {
         {showModal && 
             <Modal onClose={hideModalHandler}>
                 <NewPost 
-                    onBodyChange={onBodyChangeHandler} 
-                    onAuthorChange={onAuthorChangeHandler} 
+                    onCancel={hideModalHandler}
+                    onAddPost={addPost}
                 />
             </Modal>}
-        <ul className={classes.posts}>
-            <Post author={enteredAuthor} body={enteredBody} />
-            <Post author="hello" body="world" />
-            <Post author="hello" body="world" />
-        </ul>
+        {posts.length > 0 ? 
+            <ul className={classes.posts}>
+                {posts.map((post) => <Post key={`${post.author}${post.body}`} body={post.body} author={post.author} />)}
+            </ul> 
+                : 
+            <div className={classes.noItemsWrapper}>
+                <h2>There are no posts yet.</h2>
+                <p>Start adding some!</p>
+            </div>
+        }  
         </>
     );
 };
