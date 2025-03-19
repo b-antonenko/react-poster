@@ -1,13 +1,15 @@
-const Post = () => {
+import classes from './Post.module.css';
+
+const Post = ({ author, body }) => {
     return (
-        <div>
-            <p>
-                Bohdan
+        <li className={classes.post}>
+            <p className={classes.author}>
+                {author}
             </p>
-            <p>
-                React.js is great!
+            <p className={classes.text}>
+                {body}
             </p>
-        </div>
+        </li>
     );
 };
 
