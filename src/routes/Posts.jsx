@@ -14,3 +14,10 @@ function Posts() {
 }
 
 export default Posts;
+
+export async function loader() {
+    const response = await fetch('http://localhost:8080/posts');
+    const result = await response.json();
+
+    return result.posts
+}

@@ -1,47 +1,46 @@
-import { useState } from 'react';
 import Modal from '../components/Modal';
-import { Link } from 'react-router-dom';
+import { Link, Form, redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
 
-const NewPost = ({ onAddPost }) => {
-
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  const onBodyChangeHandler = (e) => setEnteredBody(e.target.value);
-  const onAuthorChangeHandler = (e) => setEnteredAuthor(e.target.value);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    
-    const postData = {
-      body: enteredBody,
-      author: enteredAuthor,
-    };
-
-    onAddPost(postData);
-
-   /// onCancel();
-  };
+const NewPost = () => {
 
   return (
     <Modal>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <Form method='post' className={classes.form}>
         <p>
           <label htmlFor="body">Text</label>
-          <textarea id="body" required rows={3} onChange={onBodyChangeHandler} />
+          <textarea id="body" name="body" required rows={3} />
         </p>
         <p>
           <label htmlFor="name">Your name</label>
-          <input type="text" id="name" required onChange={onAuthorChangeHandler} />
+          <input type="text" name="author" id="name" required />
         </p>
         <p className={classes.actions}>
           <Link type='button' to="/">Cancel</Link>
           <button>Submit</button>
         </p>
-      </form>
+      </Form>
     </Modal>
   );
 }
 
 export default NewPost;
+
+export async function action({request}) {
+  console.log(request);
+  const formData = await request.formData();
+  console.log(formData);
+  const postData = Object.fromEntries(formData);
+
+  console.log(postData);
+
+  await fetch('http://localhost:8080/posts', {
+    method: 'POST',
+    body: JSON.stringify(postData),
+    headers: {
+        'Content-Type': 'application/json',
+    },
+  });
+
+  return redirect('/');
+};
