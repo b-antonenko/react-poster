@@ -12,4 +12,9 @@
 .noItemsWrapper {
   text-align: center;
   color: white;
-}  
+}
+
+.loadingWrapper {
+  text-align: center;
+  color: white;
+}
