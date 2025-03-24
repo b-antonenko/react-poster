@@ -18,6 +18,6 @@ const MainHeader = () => {
       </p>
     </header>
   );
-}
+};
 
 export default MainHeader;
