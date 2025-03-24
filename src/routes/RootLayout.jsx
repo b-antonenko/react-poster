@@ -1,13 +1,13 @@
-import { Outlet } from "react-router-dom";
-import MainHeader from "../components/MainHeader";
+import { Outlet } from 'react-router-dom';
+import MainHeader from '../components/MainHeader';
 
 const RootLayout = () => {
-    return (
-        <>
-            <MainHeader />
-            <Outlet />
-        </>
-    );
+  return (
+    <>
+      <MainHeader />
+      <Outlet />
+    </>
+  );
 };
 
 export default RootLayout;

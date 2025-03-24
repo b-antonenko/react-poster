@@ -3,25 +3,25 @@ import Post from './Post';
 import classes from './PostList.module.css';
 
 const PostList = () => {
+  const posts = useLoaderData();
 
-    const posts = useLoaderData();
-
-    return (
-        <>
-            {posts.length > 0 && (
-                <ul className={classes.posts}>
-                    {posts.map((post) => <Post key={`${post.author}${post.body}`} body={post.body} author={post.author} />)}
-                </ul>       
-            )    
-            }
-            {posts.length === 0 && (
-                <div className={classes.noItemsWrapper}>
-                    <h2>There are no posts yet.</h2>
-                <p>Start adding some!</p>
-            </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      {posts.length > 0 && (
+        <ul className={classes.posts}>
+          {posts.map((post) => (
+            <Post key={`${post.author}${post.body}`} body={post.body} author={post.author} />
+          ))}
+        </ul>
+      )}
+      {posts.length === 0 && (
+        <div className={classes.noItemsWrapper}>
+          <h2>There are no posts yet.</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default PostList;

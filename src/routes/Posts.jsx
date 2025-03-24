@@ -2,7 +2,6 @@ import PostList from '../components/PostList';
 import { Outlet } from 'react-router-dom';
 
 function Posts() {
-
   return (
     <>
       <Outlet />
@@ -10,14 +9,14 @@ function Posts() {
         <PostList />
       </main>
     </>
-  )
+  );
 }
 
 export default Posts;
 
 export async function loader() {
-    const response = await fetch('http://localhost:8080/posts');
-    const result = await response.json();
+  const response = await fetch('http://localhost:8080/posts');
+  const result = await response.json();
 
-    return result.posts
+  return result.posts;
 }
