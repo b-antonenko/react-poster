@@ -2,6 +2,8 @@
 
 A minimal React app for managing posts, built with Vite, React Router, and CSS Modules.
 
+Live: https://react-poster-ab.netlify.app/
+
 ### 🚀 Features
 
 - Create and view posts.
