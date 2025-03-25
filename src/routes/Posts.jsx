@@ -30,6 +30,6 @@ export async function loader() {
     
     return data;
   } catch (error) {
-    throw new Response("Failed to load data", { status: 500 });
+    throw new Error("Failed to load data", error);
   }
 }

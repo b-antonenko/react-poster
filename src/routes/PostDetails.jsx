@@ -1,5 +1,5 @@
-import { useLoaderData, Link } from 'react-router-dom';
-
+import { useLoaderData, Link, redirect, Form } from 'react-router-dom';
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import Modal from '../components/Modal';
 import { MOCKAPI_BASE_URL, REQUEST_HEADERS } from '../constants/constants';
 import classes from './PostDetails.module.css';
@@ -25,8 +25,13 @@ function PostDetails() {
   return (
     <Modal>
       <main className={classes.details}>
-        <p className={classes.author}>{post.author}</p>
-        <p className={classes.text}>{post.body}</p>
+        <Form method="delete" className={classes.form}>
+          <p className={classes.author}>{post.author}</p>
+          <p className={classes.text}>{post.body}</p>
+          <div className={classes.removeBtnContainer}>
+            <button className={classes.btn1}><MdOutlineDeleteOutline /></button>
+          </div>
+        </Form>
       </main>
     </Modal>
   );
@@ -52,3 +57,21 @@ export const postDetailsLoader = async ({params}) => {
     console.error("Fetch error:", error);
   }
 };
+
+export async function action({ params }) {
+  const { id } = params; 
+  
+  try {
+    const response = await fetch(`${MOCKAPI_BASE_URL}/${id}`, {
+      method: 'DELETE',
+      headers: REQUEST_HEADERS,
+    });
+
+    if (response.ok) {
+      return redirect('/'); 
+    }
+
+  } catch (error) {
+    console.error("error:", error);
+  }
+}
