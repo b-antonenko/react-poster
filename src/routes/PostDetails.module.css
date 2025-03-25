@@ -9,6 +9,9 @@
     color: #543280;
     margin: 0;
     text-transform: uppercase;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   
   .text {
@@ -21,4 +24,30 @@
   
   .details a {
     text-decoration: none;
+  }
+
+  .removeBtnContainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .btn1 {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .btn1 svg {
+    height: 25px;
+    width: 25px;
+    fill: red;
+  }
+
+  .btn1:hover {
+    transform: scale(1.2);
+  }
+
+  .btn1:active {
+    transform: scale(1);
   }

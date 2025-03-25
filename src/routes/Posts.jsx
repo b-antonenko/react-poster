@@ -1,4 +1,5 @@
 import PostList from '../components/PostList';
+import { MOCKAPI_BASE_URL, REQUEST_HEADERS } from '../constants/constants';
 import { Outlet } from 'react-router-dom';
 
 function Posts() {
@@ -15,8 +16,20 @@ function Posts() {
 export default Posts;
 
 export async function loader() {
-  const response = await fetch('http://localhost:8080/posts');
-  const result = await response.json();
+  try {
+    const response = await fetch(MOCKAPI_BASE_URL, {
+      method: "GET",
+      headers: REQUEST_HEADERS,
+    });
 
-  return result.posts;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    throw new Error("Failed to load data", error);
+  }
 }

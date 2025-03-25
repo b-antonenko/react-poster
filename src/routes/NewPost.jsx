@@ -1,5 +1,6 @@
 import Modal from '../components/Modal';
 import { Link, Form, redirect } from 'react-router-dom';
+import { MOCKAPI_BASE_URL, REQUEST_HEADERS } from '../constants/constants';
 import classes from './NewPost.module.css';
 
 const NewPost = () => {
@@ -31,13 +32,20 @@ export async function action({ request }) {
   const formData = await request.formData();
   const postData = Object.fromEntries(formData);
 
-  await fetch('http://localhost:8080/posts', {
-    method: 'POST',
-    body: JSON.stringify(postData),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  try {
+    const response = await fetch(MOCKAPI_BASE_URL, {
+      method: 'POST',
+      headers: REQUEST_HEADERS,
+      body: JSON.stringify(postData)
+    });
 
-  return redirect('/');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    return redirect('/');
+  } catch (error) {
+    console.log(error);
+    throw new Response("Failed to load data", { status: 500 });
+  }
 }
