@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from 'react-router-dom';
 
 import Modal from '../components/Modal';
+import { MOCKAPI_BASE_URL, REQUEST_HEADERS } from '../constants/constants';
 import classes from './PostDetails.module.css';
 
 function PostDetails() {
@@ -34,8 +35,20 @@ function PostDetails() {
 export default PostDetails;
 
 export const postDetailsLoader = async ({params}) => {
-    const response = await fetch('http://localhost:8080/posts/' + params.id);
-    const resData = await response.json();
+  try {
+    const response = await fetch(`${MOCKAPI_BASE_URL}/${params.id}`, {
+      method: "GET",
+      headers: REQUEST_HEADERS,
+    });
 
-    return resData.post;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
 };
