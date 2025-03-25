@@ -1,12 +1,60 @@
-# React + Vite
+## 📝 Simple React Poster App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal React app for managing posts, built with Vite, React Router, and CSS Modules.
 
-Currently, two official plugins are available:
+### 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create and view posts.
+- Modal-based UI interactions.
+- Smooth navigation with React Router.
+- As a simple "back-end" MockApi.io used. 
 
-## Expanding the ESLint configuration
+### 📦 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19 & React Router 7
+- Vite (for fast builds & dev environment)
+- CSS Modules (scoped styles)
+- ESLint & Prettier (code quality & formatting)
+
+### ⚡ Installation
+
+Prerequisites:
+- Node.js (v16+ recommended)
+- npm or yarn
+
+Steps: 
+
+- Clone the repository:
+```bash
+  git clone https://github.com/yourusername/simple-react-poster.git
+```
+```bash
+  cd simple-react-poster
+```
+
+- Install dependencies:
+
+```bash
+npm install
+```
+or
+```bash
+yarn install
+```
+
+- Run the project:
+```bash
+npm run dev
+```
+
+### 📜 Scripts
+- `npm run dev` – Start the dev server
+
+- `npm run build` – Build for production
+
+- `npm run preview` – Preview the build
+
+- `npm run lint` – Check for lint errors
+
+
+
